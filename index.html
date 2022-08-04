@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>iPhone | Calculator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/main.css" />
+    <script type="module" src="scripts/main.js" defer></script>
+  </head>
+
+  <body>
+    <!-- Main -->
+    <main>
+      <div class="calc-wrapper">
+        <!-- Calculator display -->
+        <div value="0" class="calc-display"></div>
+
+        <!-- Calculator keys -->
+        <div class="calc-keys">
+          <div class="topbar">
+            <button class="clear">AC</button>
+            <button class="negative">+/-</button>
+            <button class="percent">%</button>
+          </div>
+
+          <div class="numeric">
+            <!-- First row -->
+            <button value="7" class="seven">7</button>
+            <button value="8" class="eight">8</button>
+            <button value="9" class="nine">9</button>
+
+            <!-- Second row -->
+            <button value="4" class="four">4</button>
+            <button value="5" class="five">5</button>
+            <button value="6" class="six">6</button>
+
+            <!-- Third row -->
+            <button value="1" class="one">1</button>
+            <button value="2" class="two">2</button>
+            <button value="3" class="three">3</button>
+
+            <!-- Fourth row -->
+            <button value="0" class="zero">0</button>
+            <button class="decimal">.</button>
+          </div>
+
+          <div class="sidebar">
+            <button value="/" class="divide operator">/</button>
+            <button value="*" class="multiply operator">X</button>
+            <button value="-" class="subtract operator">-</button>
+            <button value="+" class="add operator">+</button>
+            <button value="=" class="equals">=</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
