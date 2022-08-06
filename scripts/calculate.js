@@ -1,4 +1,8 @@
-const Calculate = {
+/*****
+Functions to perform calculations
+*****/
+
+export const Calculate = {
   // Add method
   add(num1, num2) {
     return num1 + num2;
@@ -17,4 +21,5 @@ const Calculate = {
   },
 };
 
-module.exports = Calculate;
+/* CJS Export for Node testing */
+// module.exports = Calculate;

@@ -1,7 +1,18 @@
+/*****
+Imports
+*****/
+
+/* CJS Imports for testing in Node */
 // Assert library
 const assert = require("assert");
 // Import calculate.js
 const Calculate = require("../scripts/calculate.js");
+// Imports display.js
+const Display = require("../scripts/display.js");
+
+/*****
+Calculate module tests
+*****/
 
 describe("Calculate", () => {
   describe(".add", () => {
@@ -51,6 +62,48 @@ describe("Calculate", () => {
       let expected = 2;
       // Exercise
       let result = Calculate.divide(num1, num2);
+      // Verify
+      assert.strictEqual(result, expected);
+    });
+  });
+});
+
+/*****
+Display module tests
+*****/
+
+describe("Display", () => {
+  describe(".logInput", () => {
+    it("adds input number to an empty array and returns the new array", () => {
+      // Setup
+      let number = 1;
+      let expected = [number];
+      // Exercise
+      let array = [];
+      let result = Display.logInput(1, array);
+      // Verify
+      assert.deepStrictEqual(result, expected);
+    });
+    it("adds input number to an already populated array and returns the new array", () => {
+      // Setup
+      let num1 = 1;
+      let num2 = 2;
+      let expected = [num1, num2];
+      // Exercise
+      let array = [1];
+      let result = Display.logInput(2, array);
+      // Verify
+      assert.deepStrictEqual(result, expected);
+    });
+  });
+
+  describe(".joinInput", () => {
+    it("joins array numbers in string format", () => {
+      // Setup
+      let expected = "12";
+      // Exercise
+      let array = [1, 2];
+      let result = Display.joinInput(array);
       // Verify
       assert.strictEqual(result, expected);
     });
