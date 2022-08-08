@@ -95,6 +95,16 @@ describe("Display", () => {
       // Verify
       assert.deepStrictEqual(result, expected);
     });
+    it("clears any zeros at the beginning when logging a new number", () => {
+      // Setup
+      let currentArray = [0];
+      let newNum = 1;
+      let expected = [1];
+      // Exercise
+      let result = Display.logInput(newNum, currentArray);
+      // Verify
+      assert.deepStrictEqual(result, expected);
+    });
   });
 
   describe(".joinInput", () => {

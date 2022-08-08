@@ -4,6 +4,9 @@ Functions to make display work
 
 const Display = {
   logInput(inputNumber, array) {
+    if (array[0] === 0) {
+      array.shift();
+    }
     array.push(inputNumber);
     return array;
   },
