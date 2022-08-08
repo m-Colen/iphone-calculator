@@ -32,13 +32,13 @@ const display = document.querySelector(".calc-display");
 
 /*
  * Adds event listener to each numeric button
- * If display length is less than 8:
+ * If display length is less than 7:
  * Calls the logInput method to add the value of the button to the currentValue array
  * Calls the joinInput method to return a string of all of the logged array values
  */
 numericButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    if (display.innerHTML.length < 8) {
+    if (display.innerHTML.length < 7) {
       display.innerHTML = Display.joinInput(
         Display.logInput(button.value, currentValue)
       );
@@ -62,4 +62,28 @@ const clearButton = document.querySelector(".clear");
 clearButton.addEventListener("click", () => {
   currentValue = Display.clearDisplay(currentValue);
   display.innerHTML = Display.joinInput(currentValue);
+});
+
+// Toggle negative/positive button
+const negToggleButton = document.querySelector(".negative");
+
+/*
+ * Toggles the display value from neg/pos || pos/neg
+ */
+
+negToggleButton.addEventListener("click", () => {
+  let toggledValue = Calculate.toggleNegative(display.innerHTML);
+  display.innerHTML = toggledValue;
+});
+
+// Convert to percent button
+const percentageButton = document.querySelector(".percent");
+
+/*
+ * Converts the display value to a percentage
+ */
+
+percentageButton.addEventListener("click", () => {
+  let percentageValue = Calculate.convertPercent(display.innerHTML);
+  display.innerHTML = percentageValue;
 });

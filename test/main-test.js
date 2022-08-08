@@ -66,6 +66,39 @@ describe("Calculate", () => {
       assert.strictEqual(result, expected);
     });
   });
+
+  describe(".toggleNegative", () => {
+    it("toggles an integer between negative/positive", () => {
+      // Setup
+      let num1 = 1;
+      let expected = num1 * -1;
+      // Exercise
+      let result = Calculate.toggleNegative(num1);
+      // Verify
+      assert.strictEqual(result, expected);
+    });
+    it("toggles a floating point number between negative/positive", () => {
+      // Setup
+      let num1 = 0.5;
+      let expected = num1 * -1;
+      // Exercise
+      let result = Calculate.toggleNegative(num1);
+      // Verify
+      assert.strictEqual(result, expected);
+    });
+  });
+
+  describe(".convertPercent", () => {
+    it("converts an integer value to a percentage", () => {
+      // Setup
+      let num1 = 50;
+      let expected = 0.5;
+      // Exercise
+      let result = Calculate.convertPercent(num1);
+      // Verify
+      assert.strictEqual(result, expected);
+    });
+  });
 });
 
 /*****

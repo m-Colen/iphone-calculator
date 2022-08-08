@@ -19,6 +19,16 @@ const Calculate = {
   divide(num1, num2) {
     return num1 / num2;
   },
+  // Toggle negative
+  toggleNegative(value) {
+    value *= -1;
+    return value;
+  },
+  // Convert to percent
+  convertPercent(value) {
+    let newValue = value / 100;
+    return newValue;
+  },
 };
 
 /* CJS Export for Node.js testing */
