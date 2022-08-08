@@ -2,7 +2,7 @@
 Functions to make display work
 *****/
 
-const Display = {
+export const Display = {
   logInput(inputNumber, array) {
     if (array[0] === 0) {
       array.shift();
@@ -21,4 +21,4 @@ const Display = {
 };
 
 /* CJS Export for Node.js testing */
-module.exports = Display;
+// module.exports = Display;

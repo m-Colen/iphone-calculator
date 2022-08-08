@@ -11,16 +11,16 @@ CJS imports for testing in Node
 */
 
 // Import calculate.js
-const Calculate = require("./scripts/calculate.js");
+// const Calculate = require("./scripts/calculate.js");
 // Imports display.js
-const Display = require("./scripts/display.js");
+// const Display = require("./scripts/display.js");
 
 /* 
 ES imports 
 */
 
-// import { Calculate } from "./calculate.js";
-// import { Display } from "./display.js";
+import { Calculate } from "./calculate.js";
+import { Display } from "./display.js";
 
 // Current value(s) for display
 let currentValue = [];
@@ -86,4 +86,29 @@ const percentageButton = document.querySelector(".percent");
 percentageButton.addEventListener("click", () => {
   let percentageValue = Calculate.convertPercent(display.innerHTML);
   display.innerHTML = percentageValue;
+});
+
+// Operator buttons
+const operatorButtons = document.querySelectorAll(".operator");
+
+// First number
+let firstNum;
+// Current operator
+let currentOperator;
+
+//
+operatorButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    firstNum = Display.joinInput(currentValue);
+    currentOperator = button.value;
+    currentValue = Display.clearDisplay(currentValue);
+    display.innerHTML = currentOperator;
+  });
+});
+
+// Equal button
+const equalButton = document.querySelector(".equals");
+
+equalButton.addEventListener("click", () => {
+  display.innerHTML = Calculate.result(firstNum, currentOperator, currentValue);
 });

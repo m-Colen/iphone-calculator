@@ -2,7 +2,7 @@
 Functions to perform basic calculations
 *****/
 
-const Calculate = {
+export const Calculate = {
   // Add method
   add(num1, num2) {
     return num1 + num2;
@@ -29,7 +29,26 @@ const Calculate = {
     let newValue = value / 100;
     return newValue;
   },
+  // Result
+  result(num1, operator, num2) {
+    switch (operator) {
+      case "/":
+        return this.divide(num1, num2);
+      case "*":
+        console.log(num1);
+        console.log(num2);
+        return this.multiply(num1, num2);
+      case "+":
+        return this.add(num1, num2);
+      case "-":
+        return this.subtract(num1, num2);
+      default:
+        console.log(num1);
+        console.log(operator);
+        console.log(num2);
+    }
+  },
 };
 
 /* CJS Export for Node.js testing */
-module.exports = Calculate;
+// module.exports = Calculate;
