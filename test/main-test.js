@@ -108,4 +108,16 @@ describe("Display", () => {
       assert.strictEqual(result, expected);
     });
   });
+
+  describe(".clearDisplay", () => {
+    it("clears the current array and returns an array with [0]", () => {
+      // Setup
+      let currentArray = [1, 2, 3];
+      let expected = [0];
+      // Exercise
+      let result = Display.clearDisplay(currentArray);
+      // Verify
+      assert.deepStrictEqual(result, expected);
+    });
+  });
 });

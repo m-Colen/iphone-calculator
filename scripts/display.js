@@ -2,7 +2,7 @@
 Functions to make display work
 *****/
 
-export const Display = {
+const Display = {
   logInput(inputNumber, array) {
     array.push(inputNumber);
     return array;
@@ -11,7 +11,11 @@ export const Display = {
     const joined = array.join("");
     return joined;
   },
+  clearDisplay(array) {
+    array = [0];
+    return array;
+  },
 };
 
-/* CJS Export for Node testing */
-// module.exports = Display;
+/* CJS Export for Node.js testing */
+module.exports = Display;
