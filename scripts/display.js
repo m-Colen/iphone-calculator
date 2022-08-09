@@ -1,9 +1,11 @@
 /*****
-Functions to make display work
+Module for calculator display functions
 *****/
 
 export const Display = {
+  // Adds input number(s) to a new array
   logInput(inputNumber, array) {
+    // Removes zero when entering new num
     if (array[0] === 0) {
       array.shift();
     }
@@ -11,7 +13,8 @@ export const Display = {
     return array;
   },
   joinInput(array) {
-    const joined = array.join("");
+    let joined = array.join("");
+    joined = parseFloat(joined);
     return joined;
   },
   clearDisplay(array) {

@@ -15,11 +15,19 @@ Calculate module tests
 *****/
 
 describe("Calculate", () => {
+  // Shared variables
+  let num1;
+  let num2;
+
   describe(".add", () => {
+    // Hook
+    beforeEach(() => {
+      num1 = 1;
+      num2 = 2;
+    });
+
     it("adds two arguments together", () => {
       // Setup
-      let num1 = 1;
-      let num2 = 2;
       let expected = 3;
       // Exercise
       let result = Calculate.add(num1, num2);
@@ -31,9 +39,7 @@ describe("Calculate", () => {
   describe(".subtract", () => {
     it("subtracts the second argument from the first", () => {
       // Setup
-      let num1 = 2;
-      let num2 = 1;
-      let expected = 1;
+      let expected = -1;
       // Exercise
       let result = Calculate.subtract(num1, num2);
       // Verify
@@ -44,9 +50,7 @@ describe("Calculate", () => {
   describe(".multiply", () => {
     it("multiplies the two arguments", () => {
       // Setup
-      let num1 = 2;
-      let num2 = 5;
-      let expected = 10;
+      let expected = 2;
       // Exercise
       let result = Calculate.multiply(num1, num2);
       // Verify
@@ -57,9 +61,7 @@ describe("Calculate", () => {
   describe(".divide", () => {
     it("divides the first argument by the second", () => {
       // Setup
-      let num1 = 10;
-      let num2 = 5;
-      let expected = 2;
+      let expected = 0.5;
       // Exercise
       let result = Calculate.divide(num1, num2);
       // Verify
@@ -70,7 +72,6 @@ describe("Calculate", () => {
   describe(".toggleNegative", () => {
     it("toggles an integer between negative/positive", () => {
       // Setup
-      let num1 = 1;
       let expected = num1 * -1;
       // Exercise
       let result = Calculate.toggleNegative(num1);
@@ -79,7 +80,7 @@ describe("Calculate", () => {
     });
     it("toggles a floating point number between negative/positive", () => {
       // Setup
-      let num1 = 0.5;
+      num1 = 0.5;
       let expected = num1 * -1;
       // Exercise
       let result = Calculate.toggleNegative(num1);
@@ -91,7 +92,7 @@ describe("Calculate", () => {
   describe(".convertPercent", () => {
     it("converts an integer value to a percentage", () => {
       // Setup
-      let num1 = 50;
+      num1 = 50;
       let expected = 0.5;
       // Exercise
       let result = Calculate.convertPercent(num1);
@@ -107,6 +108,16 @@ Display module tests
 
 describe("Display", () => {
   describe(".logInput", () => {
+    it("removes zero once user types in a new number", () => {
+      // Setup
+      let array = [0];
+      let newNum = 1;
+      let expected = [1];
+      // Exercise
+      let result = Display.logInput(newNum, array);
+      // Verify
+      assert.deepStrictEqual(result, expected);
+    });
     it("adds input number to an empty array and returns the new array", () => {
       // Setup
       let number = 1;
@@ -143,7 +154,7 @@ describe("Display", () => {
   describe(".joinInput", () => {
     it("joins array numbers in string format", () => {
       // Setup
-      let expected = "12";
+      let expected = 12;
       // Exercise
       let array = [1, 2];
       let result = Display.joinInput(array);
