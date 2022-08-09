@@ -35,17 +35,11 @@ export const Calculate = {
       case "/":
         return this.divide(num1, num2);
       case "*":
-        console.log(num1);
-        console.log(num2);
         return this.multiply(num1, num2);
       case "+":
         return this.add(num1, num2);
       case "-":
         return this.subtract(num1, num2);
-      default:
-        console.log(num1);
-        console.log(operator);
-        console.log(num2);
     }
   },
 };

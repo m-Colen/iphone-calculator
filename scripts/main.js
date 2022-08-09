@@ -38,6 +38,7 @@ const display = document.querySelector(".calc-display");
  */
 numericButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    // Ensures that the display length doesn't impact calculator styling
     if (display.innerHTML.length < 7) {
       display.innerHTML = Display.joinInput(
         Display.logInput(button.value, currentValue)
@@ -99,7 +100,7 @@ let currentOperator;
 //
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    firstNum = Display.joinInput(currentValue);
+    firstNum = parseFloat(Display.joinInput(currentValue));
     currentOperator = button.value;
     currentValue = Display.clearDisplay(currentValue);
     display.innerHTML = currentOperator;
@@ -110,5 +111,10 @@ operatorButtons.forEach((button) => {
 const equalButton = document.querySelector(".equals");
 
 equalButton.addEventListener("click", () => {
-  display.innerHTML = Calculate.result(firstNum, currentOperator, currentValue);
+  let result = Calculate.result(
+    firstNum,
+    currentOperator,
+    parseFloat(Display.joinInput(currentValue))
+  );
+  display.innerHTML = result;
 });
