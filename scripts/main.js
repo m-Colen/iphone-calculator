@@ -11,44 +11,34 @@ CJS imports for testing in Node
 */
 
 // Import calculate.js
-// const Calculate = require("./scripts/calculate.js");
+const Calculate = require("./scripts/calculate.js");
 // Imports display.js
-// const Display = require("./scripts/display.js");
+const Display = require("./scripts/display.js");
 
 /* 
 ES imports 
 */
 
-import { Calculate } from "./calculate.js";
-import { Display } from "./display.js";
-
-// Current value(s) for display
-let currentValue = [];
+// import { Calculate } from "./calculate.js";
+// import { Display } from "./display.js";
 
 // Numeric buttons
 const numericButtons = document.querySelectorAll(".numeric > button");
-// Display
-const display = document.querySelector(".calc-display");
+// Calculator display
+let display = document.querySelector(".calc-display");
 
-/*
- * Adds event listener to each numeric button
- * If display length is less than 7:
- * Calls the logInput method to add the value of the button to the currentValue array
- * Calls the joinInput method to return a string of all of the logged array values
- */
+// Current value(s) for display
+let currentArray = [];
+let currentValue = 0;
+
 numericButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    // Ensures that the display length doesn't impact calculator styling
-    if (display.innerHTML.length < 7) {
-      display.innerHTML = Display.joinInput(
-        Display.logInput(button.value, currentValue)
-      );
-    } else {
-      currentValue.shift();
-      display.innerHTML = Display.joinInput(
-        Display.logInput(button.value, currentValue)
-      );
+    if (currentArray.length >= 7) {
+      currentArray.shift();
     }
+    currentArray = Display.logInput(button.value, currentArray);
+    currentValue = Display.joinInput(currentArray);
+    display.innerHTML = currentValue;
   });
 });
 
@@ -61,8 +51,9 @@ const clearButton = document.querySelector(".clear");
  */
 
 clearButton.addEventListener("click", () => {
-  currentValue = Display.clearDisplay(currentValue);
-  display.innerHTML = Display.joinInput(currentValue);
+  currentArray = Display.clearDisplay(currentArray);
+  currentValue = Display.joinInput(currentArray);
+  display.innerHTML = currentValue;
 });
 
 // Toggle negative/positive button
@@ -73,8 +64,8 @@ const negToggleButton = document.querySelector(".negative");
  */
 
 negToggleButton.addEventListener("click", () => {
-  let toggledValue = Calculate.toggleNegative(display.innerHTML);
-  display.innerHTML = toggledValue;
+  currentValue = Calculate.toggleNegative(currentValue);
+  display.innerHTML = currentValue;
 });
 
 // Convert to percent button
@@ -85,8 +76,8 @@ const percentageButton = document.querySelector(".percent");
  */
 
 percentageButton.addEventListener("click", () => {
-  let percentageValue = Calculate.convertPercent(display.innerHTML);
-  display.innerHTML = percentageValue;
+  currentValue = Calculate.convertPercent(currentValue);
+  display.innerHTML = currentValue;
 });
 
 // Operator buttons
@@ -100,9 +91,10 @@ let currentOperator;
 //
 operatorButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    firstNum = parseFloat(Display.joinInput(currentValue));
+    firstNum = currentValue;
     currentOperator = button.value;
-    currentValue = Display.clearDisplay(currentValue);
+    currentArray = Display.clearDisplay(currentArray);
+    currentValue = Display.joinInput(currentArray);
     display.innerHTML = currentOperator;
   });
 });
@@ -111,10 +103,6 @@ operatorButtons.forEach((button) => {
 const equalButton = document.querySelector(".equals");
 
 equalButton.addEventListener("click", () => {
-  let result = Calculate.result(
-    firstNum,
-    currentOperator,
-    parseFloat(Display.joinInput(currentValue))
-  );
-  display.innerHTML = result;
+  currentValue = Calculate.result(firstNum, currentOperator, currentValue);
+  display.innerHTML = currentValue;
 });

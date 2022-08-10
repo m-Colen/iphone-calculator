@@ -2,14 +2,14 @@
 Module for calculator display functions
 *****/
 
-export const Display = {
+const Display = {
   // Adds input number(s) to a new array
   logInput(inputNumber, array) {
     // Removes zero when entering new num
     if (array[0] === 0) {
       array.shift();
     }
-    array.push(inputNumber);
+    array.push(parseFloat(inputNumber));
     return array;
   },
   joinInput(array) {
@@ -24,4 +24,4 @@ export const Display = {
 };
 
 /* CJS Export for Node.js testing */
-// module.exports = Display;
+module.exports = Display;

@@ -2,7 +2,7 @@
 Functions to perform basic calculations
 *****/
 
-export const Calculate = {
+const Calculate = {
   // Add method
   add(num1, num2) {
     return num1 + num2;
@@ -45,4 +45,4 @@ export const Calculate = {
 };
 
 /* CJS Export for Node.js testing */
-// module.exports = Calculate;
+module.exports = Calculate;
