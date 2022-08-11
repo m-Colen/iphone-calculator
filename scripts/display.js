@@ -1,6 +1,6 @@
-/*****
-Module for calculator display functions
-*****/
+/***
+Display module
+***/
 
 export const Display = {
   logKey(event) {

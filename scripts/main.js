@@ -10,24 +10,10 @@ Imports
 import { Calculate } from "./calculate.js";
 import { Display } from "./display.js";
 
-/***
-Buttons
-***/
-
-// Numeric buttons
-const numericButtons = document.querySelectorAll(".numeric > button");
-// Clear button
-const clearButton = document.querySelector(".clear");
-// Toggle negative/positive button
-const negToggleButton = document.querySelector(".negative");
-// Percent button
-const percentageButton = document.querySelector(".percent");
-// Operator buttons
-const operatorButtons = document.querySelectorAll(".operator");
-// Equal button
-const equalButton = document.querySelector(".equals");
 // Calculator display
 let display = document.querySelector(".calc-display");
+// All buttons
+const allButtons = document.querySelectorAll("button");
 
 /***
 Global variables 
@@ -41,53 +27,73 @@ let firstNum;
 // Current operator
 let currentOperator;
 
-const updateDisplay = () => {
-  currentValue = Display.joinInput(currentArray);
-  display.innerHTML = currentValue;
+// Updates calc display
+const updateDisplay = (displayElem, value) => {
+  displayElem.innerHTML = value;
 };
 
-// Sets 'click' event listener for numeric keys
-numericButtons.forEach((button) => {
-  button.addEventListener("click", () => {
+/*** 
+Event listeners
+***/
+
+allButtons.forEach((button) => {
+  button.addEventListener("click", (e) => {
+    let key = e.target.value;
     if (currentArray.length >= 7) {
       currentArray.shift();
+    } else {
+      switch (key) {
+        case "0":
+        case "1":
+        case "2":
+        case "3":
+        case "4":
+        case "5":
+        case "6":
+        case "7":
+        case "8":
+        case "9":
+          key = parseInt(e.target.value);
+          currentArray = Display.logInput(key, currentArray);
+          currentValue = Display.joinInput(currentArray);
+          updateDisplay(display, currentValue);
+          break;
+        case "/":
+        case "*":
+        case "-":
+        case "+":
+          firstNum = Display.joinInput(currentArray);
+          currentOperator = key;
+          currentArray = Display.clearDisplay(currentArray);
+          updateDisplay(display, key);
+          break;
+        case "clear":
+          currentArray = Display.clearDisplay(currentArray);
+          currentValue = Display.joinInput(currentArray);
+          updateDisplay(display, currentValue);
+          break;
+        case "negative":
+          currentValue = Calculate.toggleNegative(currentValue);
+          updateDisplay(display, currentValue);
+          break;
+        case "percent":
+          currentValue = Calculate.convertPercent(currentValue);
+          updateDisplay(display, currentValue);
+          break;
+        case "=":
+          currentValue = Calculate.result(
+            firstNum,
+            currentOperator,
+            currentValue
+          );
+          currentArray = [currentValue];
+          updateDisplay(display, currentValue);
+          break;
+        case ".":
+          currentArray = Calculate.addDecimal(currentArray);
+          currentValue = Display.joinInput(currentArray);
+          display.innerHTML = `${currentValue}.`;
+      }
     }
-    currentArray = Display.logInput(button.value, currentArray);
-    updateDisplay();
   });
-});
-
-// Sets 'click' event listener for clear button
-clearButton.addEventListener("click", () => {
-  currentArray = Display.clearDisplay(currentArray);
-  updateDisplay();
-});
-
-// Sets 'click' event listener for negative toggle button
-negToggleButton.addEventListener("click", () => {
-  currentValue = Calculate.toggleNegative(currentValue);
-  display.innerHTML = currentValue;
-});
-
-// Sets 'click' event listener for percent button
-percentageButton.addEventListener("click", () => {
-  currentValue = Calculate.convertPercent(currentValue);
-  display.innerHTML = currentValue;
-});
-
-// Sets 'click' event listener for operator buttons
-operatorButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    firstNum = currentValue;
-    currentOperator = button.value;
-    currentArray = Display.clearDisplay(currentArray);
-    currentValue = Display.joinInput(currentArray);
-    display.innerHTML = currentOperator;
-  });
-});
-
-// Sets 'click' event listener for equal button
-equalButton.addEventListener("click", () => {
-  currentValue = Calculate.result(firstNum, currentOperator, currentValue);
-  display.innerHTML = currentValue;
 });
