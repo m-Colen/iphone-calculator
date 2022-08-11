@@ -1,8 +1,8 @@
-/*****
-Functions to perform basic calculations
-*****/
+/***
+Module to perform basic calculations
+***/
 
-const Calculate = {
+export const Calculate = {
   // Add method
   add(num1, num2) {
     return num1 + num2;
@@ -44,5 +44,5 @@ const Calculate = {
   },
 };
 
-/* CJS Export for Node.js testing */
-module.exports = Calculate;
+/* CJS Export for node.js testing */
+// module.exports = Calculate;

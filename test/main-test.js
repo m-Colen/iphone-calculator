@@ -1,18 +1,15 @@
-/*****
+/***
 Imports
-*****/
+***/
 
 /* CJS Imports for testing in Node */
-// Assert library
-const assert = require("assert");
-// Import calculate.js
-const Calculate = require("../scripts/calculate.js");
-// Imports display.js
-const Display = require("../scripts/display.js");
+// const assert = require("assert");
+// const Calculate = require("../scripts/calculate.js");
+// const Display = require("../scripts/display.js");
 
-/*****
+/***
 Calculate module tests
-*****/
+***/
 
 describe("Calculate", () => {
   // Shared variables
@@ -102,9 +99,9 @@ describe("Calculate", () => {
   });
 });
 
-/*****
+/***
 Display module tests
-*****/
+***/
 
 describe("Display", () => {
   describe(".logInput", () => {

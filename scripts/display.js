@@ -2,7 +2,11 @@
 Module for calculator display functions
 *****/
 
-const Display = {
+export const Display = {
+  logKey(event) {
+    const key = event.key;
+    return key;
+  },
   // Adds input number(s) to a new array
   logInput(inputNumber, array) {
     // Removes zero when entering new num
@@ -23,5 +27,5 @@ const Display = {
   },
 };
 
-/* CJS Export for Node.js testing */
-module.exports = Display;
+/* CJS Export for node.js testing */
+// module.exports = Display;
