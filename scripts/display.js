@@ -25,6 +25,15 @@ export const Display = {
     array = [0];
     return array;
   },
+  backspace(array) {
+    if (array.length > 1) {
+      array.pop();
+      return array;
+    } else {
+      array = [0];
+      return array;
+    }
+  },
 };
 
 /* CJS Export for node.js testing */

@@ -38,6 +38,7 @@ Event listeners
 
 allButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
+    e.preventDefault();
     let key = e.target.value;
     if (currentArray.length >= 7) {
       currentArray.shift();
@@ -73,11 +74,14 @@ allButtons.forEach((button) => {
           updateDisplay(display, currentValue);
           break;
         case "negative":
-          currentValue = Calculate.toggleNegative(currentValue);
+          let toggled = Calculate.toggleNegative(currentValue);
+          currentValue = toggled;
+          currentArray = [currentValue];
           updateDisplay(display, currentValue);
           break;
         case "percent":
-          currentValue = Calculate.convertPercent(currentValue);
+          currentArray = [Calculate.convertPercent(currentValue)];
+          currentValue = Display.joinInput(currentArray);
           updateDisplay(display, currentValue);
           break;
         case "=":
@@ -96,4 +100,66 @@ allButtons.forEach((button) => {
       }
     }
   });
+});
+
+window.addEventListener("keyup", (e) => {
+  let key = e.key;
+  if (currentArray.length >= 7) {
+    currentArray.shift();
+  } else {
+    switch (key) {
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
+        key = parseInt(e.key);
+        currentArray = Display.logInput(key, currentArray);
+        currentValue = Display.joinInput(currentArray);
+        updateDisplay(display, currentValue);
+        break;
+      case "/":
+      case "*":
+      case "-":
+      case "+":
+        firstNum = Display.joinInput(currentArray);
+        currentOperator = key;
+        currentArray = Display.clearDisplay(currentArray);
+        updateDisplay(display, key);
+        break;
+      case "Delete":
+        currentArray = Display.clearDisplay(currentArray);
+        currentValue = Display.joinInput(currentArray);
+        updateDisplay(display, currentValue);
+        break;
+      case "%":
+        currentValue = Calculate.convertPercent(currentValue);
+        currentArray = [currentValue];
+        updateDisplay(display, currentValue);
+        break;
+      case "Enter":
+        currentValue = Calculate.result(
+          firstNum,
+          currentOperator,
+          currentValue
+        );
+        currentArray = [currentValue];
+        updateDisplay(display, currentValue);
+        break;
+      case ".":
+        currentArray = Calculate.addDecimal(currentArray);
+        currentValue = Display.joinInput(currentArray);
+        display.innerHTML = `${currentValue}.`;
+        break;
+      case "Backspace":
+        currentArray = Display.backspace(currentArray);
+        currentValue = Display.joinInput(currentArray);
+        updateDisplay(display, currentValue);
+    }
+  }
 });
