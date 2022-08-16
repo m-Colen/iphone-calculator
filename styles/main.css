@@ -28,9 +28,11 @@ button {
   height: 21vw;
   max-height: 100px;
   text-align: center;
+  line-height: 1em;
+  padding: 0px;
   border: none;
   font-size: 2rem;
-  margin: 2vw 1.5vw;
+  margin: 1vw 1.5vw;
 }
 
 button:hover {
@@ -38,9 +40,21 @@ button:hover {
   opacity: 0.8;
 }
 
+@media only screen and (max-width: 750px) {
+  html {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 550px) {
+  html {
+    font-size: 0.8rem;
+  }
+}
+
 @media only screen and (max-width: 350px) {
   html {
-    font-size: .7rem;
+    font-size: 0.7rem;
   }
 }
 
@@ -61,7 +75,7 @@ button:hover {
   font-size: 5rem;
   height: calc(5rem + 15vh);
   margin: 0 1.5vw;
-  padding-top: 15vh;
+  padding-top: 12vh;
   padding-bottom: 2vh;
   display: flex;
   justify-content: end;
