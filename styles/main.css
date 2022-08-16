@@ -22,16 +22,19 @@ body {
 }
 
 button {
+  color: #000;
   border-radius: 50%;
   width: 21vw;
+  min-width: 60px;
   max-width: 100px;
   height: 21vw;
+  min-height: 60px;
   max-height: 100px;
   text-align: center;
   line-height: 1em;
   padding: 0px;
   border: none;
-  font-size: 2rem;
+  font-size: 2.5rem;
   margin: 1vw 1.5vw;
 }
 
@@ -135,7 +138,7 @@ button:hover {
 
 .zero {
   grid-column: 1 / span 2;
-  width: 45vw !important;
-  max-width: calc(200px + 3vw) !important;
+  width: 45vw;
+  max-width: calc(200px + 3vw);
   border-radius: 100px;
 }
