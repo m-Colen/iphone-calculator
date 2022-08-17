@@ -24,11 +24,11 @@ body {
 button {
   color: #000;
   border-radius: 50%;
-  width: 72px;
-  height: 72px;
+  width: 77px;
+  height: 77px;
   margin: 1px;
   border: none;
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 button:hover {
@@ -44,12 +44,13 @@ button:hover {
 
 .calc-display {
   color: #fff;
-  font-size: 4rem;
-  height: 30%;
+  font-size: 5rem;
+  height: 27%;
   display: flex;
   justify-content: end;
   align-items: end;
   padding-right: 1.5rem;
+  padding-bottom: 5vh;
 }
 
 /* Calculator keys wrapper */
@@ -106,7 +107,7 @@ button:hover {
 
 .zero {
   grid-column: 1 / span 2;
-  width: calc(144px + 10px);
+  width: calc(154px + 11px);
   border-radius: 100px;
 }
 
