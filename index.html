@@ -12,6 +12,11 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
       rel="stylesheet"
     />
+    <!-- Icons -->
+    <script
+      src="https://kit.fontawesome.com/972df6eb1d.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- Styles -->
     <link rel="stylesheet" href="styles/main.css" />
     <!-- Scripts -->
@@ -23,45 +28,79 @@
     <main>
       <div class="calc-wrapper">
         <!-- Calculator display -->
-        <div value="0" class="calc-display"></div>
+        <div value="0" class="calc-display">0</div>
 
         <!-- Calculator keys -->
         <div class="calc-keys">
           <div class="topbar">
             <button value="clear" class="clear">AC</button>
-            <button value="negative" class="negative">+/-</button>
-            <button value="percent" class="percent">%</button>
+            <button value="negative" class="negative">
+              <i class="fa-solid fa-plus-minus"></i>
+            </button>
+            <button value="percent" class="percent">
+              <i class="fa-solid fa-percent"></i>
+            </button>
           </div>
 
           <!-- Numeric keys-->
           <div class="numeric">
             <!-- First row -->
-            <button value="7" class="seven">7</button>
-            <button value="8" class="eight">8</button>
-            <button value="9" class="nine">9</button>
+            <button value="7" class="seven">
+              <i class="fa-solid fa-7"></i>
+            </button>
+            <button value="8" class="eight">
+              <i class="fa-solid fa-8"></i>
+            </button>
+            <button value="9" class="nine">
+              <i class="fa-solid fa-9"></i>
+            </button>
 
             <!-- Second row -->
-            <button value="4" class="four">4</button>
-            <button value="5" class="five">5</button>
-            <button value="6" class="six">6</button>
+            <button value="4" class="four">
+              <i class="fa-solid fa-4"></i>
+            </button>
+            <button value="5" class="five">
+              <i class="fa-solid fa-5"></i>
+            </button>
+            <button value="6" class="six">
+              <i class="fa-solid fa-6"></i>
+            </button>
 
             <!-- Third row -->
-            <button value="1" class="one">1</button>
-            <button value="2" class="two">2</button>
-            <button value="3" class="three">3</button>
+            <button value="1" class="one">
+              <i class="fa-solid fa-1"></i>
+            </button>
+            <button value="2" class="two">
+              <i class="fa-solid fa-2"></i>
+            </button>
+            <button value="3" class="three">
+              <i class="fa-solid fa-3"></i>
+            </button>
 
             <!-- Fourth row -->
-            <button value="0" class="zero">0</button>
+            <button value="0" class="zero">
+              <i class="fa-solid fa-0"></i>
+            </button>
             <button value="." class="decimal">.</button>
           </div>
 
           <!-- Operator keys-->
           <div class="sidebar">
-            <button value="/" class="divide operator">/</button>
-            <button value="*" class="multiply operator">X</button>
-            <button value="-" class="subtract operator">-</button>
-            <button value="+" class="add operator">+</button>
-            <button value="=" class="equals">=</button>
+            <button value="/" class="divide operator">
+              <i class="fa-solid fa-divide"></i>
+            </button>
+            <button value="*" class="multiply operator">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+            <button value="-" class="subtract operator">
+              <i class="fa-solid fa-minus"></i>
+            </button>
+            <button value="+" class="add operator">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+            <button value="=" class="equals">
+              <i class="fa-solid fa-equals"></i>
+            </button>
           </div>
         </div>
       </div>

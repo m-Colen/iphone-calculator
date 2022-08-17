@@ -28,7 +28,8 @@ button {
   height: 77px;
   margin: 1px;
   border: none;
-  font-size: 2rem;
+  font-size: 1.8rem;
+  font-weight: bold;
   padding: 0;
   line-height: 1;
   text-align: center;
@@ -47,19 +48,24 @@ button:hover {
 
 .calc-display {
   color: #fff;
-  font-size: 5rem;
-  height: 27%;
+  font-size: 4rem;
+  height: 35%;
   display: flex;
   justify-content: end;
   align-items: end;
-  padding-right: 1.5rem;
-  padding-bottom: 5vh;
+  padding: 0 1.5rem;
+}
+
+@media only screen and (max-height: 700px) {
+  .calc-display {
+    padding: 3rem 1.5rem;
+  }
 }
 
 /* Calculator keys wrapper */
 
 .calc-keys {
-  height: 70%;
+  height: 60%;
   grid-template-columns: 3fr 1fr;
   justify-items: center;
   align-content: center;
@@ -126,4 +132,8 @@ button:hover {
   html {
     font-size: 0.8rem;
   }
+}
+
+.fa-solid {
+  font-size: 2rem;
 }
