@@ -3,15 +3,10 @@ Display module
 ***/
 
 export const Display = {
-  logKey(event) {
-    const key = event.key;
-    return key;
-  },
   // Adds input number(s) to a new array
   logInput(inputNumber, array) {
     // Removes zero when entering new num
-    if (array[0] === 0) {
-      array.shift();
+    if (array[0] === 0 && !array.includes(".")) {
     }
     array.push(parseFloat(inputNumber));
     return array;
@@ -24,15 +19,6 @@ export const Display = {
   clearDisplay(array) {
     array = [0];
     return array;
-  },
-  backspace(array) {
-    if (array.length > 1) {
-      array.pop();
-      return array;
-    } else {
-      array = [0];
-      return array;
-    }
   },
 };
 

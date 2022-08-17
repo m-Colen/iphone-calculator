@@ -14,6 +14,8 @@ import { Display } from "./display.js";
 let display = document.querySelector(".calc-display");
 // All buttons
 const allButtons = document.querySelectorAll("button");
+// All icons
+const allIcons = document.querySelectorAll("i");
 
 /***
 Global variables 
@@ -22,14 +24,42 @@ Global variables
 // Current value(s) for calc display
 let currentArray = [];
 let currentValue = 0;
-// Variable for storing first value during calculation
+// Variable for storing numbers during calculation
 let firstNum;
+let secondNum;
 // Current operator
 let currentOperator;
 
 // Updates calc display
-const updateDisplay = (displayElem, value) => {
-  displayElem.innerHTML = value;
+const updateDisplay = (elem, value) => {
+  elem.innerHTML = value;
+};
+
+// Updates current value
+const updateCurrentValue = () => {
+  currentValue = Display.joinInput(currentArray);
+};
+
+// Clears display
+const clearArray = () => {
+  currentArray = Display.clearDisplay(currentArray);
+};
+
+const monitorDisplayLength = () => {
+  // Shifts sizing of calc display based on entry length
+  if (currentArray.length <= 6) {
+    display.style.fontSize = "4.1rem";
+  } else if (currentArray.length > 6 && currentArray.length < 10) {
+    display.style.fontSize = "3rem";
+  } else if (currentArray.length >= 10 && currentArray.length < 15) {
+    display.style.fontSize = "2.2rem";
+  } else {
+    display.style.fontSize = "1.5rem";
+  }
+  // Resets font size when the length reaches the 1e+ size
+  if (display.innerHTML.includes("e")) {
+    display.style.fontSize = "4.1rem";
+  }
 };
 
 /*** 
@@ -38,9 +68,7 @@ Event listeners
 
 // Reads key action
 const keyActions = (key) => {
-  if (currentArray.length >= 7) {
-    currentArray.shift();
-  }
+  console.log("KEY-PRESSED:", key);
   switch (key) {
     case "0":
     case "1":
@@ -52,49 +80,63 @@ const keyActions = (key) => {
     case "7":
     case "8":
     case "9":
-      key = parseInt(key);
-      currentArray = Display.logInput(key, currentArray);
-      currentValue = Display.joinInput(currentArray);
+      console.log("NEW NUMBER LOGGED");
+      key = parseInt(key); // Converts input to number
+      let newArray = Display.logInput(key, currentArray);
+      currentArray = newArray;
+      updateCurrentValue();
       updateDisplay(display, currentValue);
+      console.log("NEW NUMBER: currentArray", currentArray);
+      console.log("NEW NUMBER: currentValue:", currentValue);
       break;
     case "/":
     case "*":
     case "-":
     case "+":
       firstNum = Display.joinInput(currentArray);
+      console.log("OPERATOR: firstNum:", firstNum);
       currentOperator = key;
-      currentArray = Display.clearDisplay(currentArray);
+      clearArray();
+      console.log("OPERATOR: currentArray", currentArray);
+      updateCurrentValue();
       updateDisplay(display, key);
+      console.log("OPERATOR: currentValue", currentValue);
       break;
-    case "clear":
-      currentArray = Display.clearDisplay(currentArray);
-      currentValue = Display.joinInput(currentArray);
+    case "delete":
+      clearArray();
+      updateCurrentValue();
       updateDisplay(display, currentValue);
       break;
     case "negative":
-      let toggled = Calculate.toggleNegative(currentValue);
-      currentValue = toggled;
-      currentArray = [currentValue];
+      currentArray[0] === "-"
+        ? currentArray.shift()
+        : currentArray.unshift("-");
+      updateCurrentValue();
       updateDisplay(display, currentValue);
+      console.log("NEGATIVE: currentArray", currentArray);
+      console.log("NEGATIVE: currentValue", currentValue);
       break;
-    case "percent":
+    case "%":
       currentArray = [Calculate.convertPercent(currentValue)];
-      currentValue = Display.joinInput(currentArray);
+      updateCurrentValue();
       updateDisplay(display, currentValue);
       break;
-    case "=":
-      currentValue = Calculate.result(firstNum, currentOperator, currentValue);
-      currentArray = [currentValue];
+    case "enter":
+      currentArray = [
+        Calculate.result(firstNum, currentOperator, currentValue),
+      ];
+      console.log("RESULT - CURRENT ARRAY:", currentArray);
+      updateCurrentValue();
+      console.log("RESULT - CURRENT VALUE:", currentValue);
       updateDisplay(display, currentValue);
-      break;
     case ".":
       currentArray = Calculate.addDecimal(currentArray);
-      currentValue = Display.joinInput(currentArray);
-      display.innerHTML = `${currentValue}.`;
+      updateCurrentValue();
   }
+  monitorDisplayLength();
 };
 
-// Click listener
+// Click listener for buttons
 allButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     let key = e.target.value;
@@ -102,8 +144,22 @@ allButtons.forEach((button) => {
   });
 });
 
+// Click listener for icons
+allIcons.forEach((icon) => {
+  icon.addEventListener("click", (e) => {
+    // Allows icons to be clicked and assigns the value of the parent (button)
+    let key = e.target.parentNode.value;
+    keyActions(key);
+  });
+});
+
 // Key listener
-window.addEventListener("keyup", (e) => {
+window.addEventListener("keydown", (e) => {
+  // Prevents Firefox's 'quick find' shortcut
+  if (e.key === "/") {
+    e.preventDefault();
+  }
   let key = e.key;
+  key = key.toLowerCase();
   keyActions(key);
 });
