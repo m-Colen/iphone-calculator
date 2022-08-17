@@ -29,6 +29,9 @@ button {
   margin: 1px;
   border: none;
   font-size: 2rem;
+  padding: 0;
+  line-height: 1;
+  text-align: center;
 }
 
 button:hover {
