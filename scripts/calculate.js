@@ -3,22 +3,6 @@ Calculate module
 ***/
 
 export const Calculate = {
-  // Add method
-  add(num1, num2) {
-    return num1 + num2;
-  },
-  // Subtract method
-  subtract(num1, num2) {
-    return num1 - num2;
-  },
-  // Multiply method
-  multiply(num1, num2) {
-    return num1 * num2;
-  },
-  // Divide method
-  divide(num1, num2) {
-    return num1 / num2;
-  },
   // Convert to percent
   convertPercent(value) {
     let newValue = value / 100;
@@ -40,13 +24,15 @@ export const Calculate = {
   result(num1, operator, num2) {
     switch (operator) {
       case "/":
-        return this.divide(num1, num2);
+        return num1 / num2;
       case "*":
-        return this.multiply(num1, num2);
+        return num1 * num2;
       case "+":
-        return this.add(num1, num2);
+        console.log("num1:", num1);
+        console.log("num2:", num2);
+        return num1 + num2;
       case "-":
-        return this.subtract(num1, num2);
+        return num1 - num2;
     }
   },
 };

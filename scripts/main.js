@@ -16,6 +16,8 @@ let display = document.querySelector(".calc-display");
 const allButtons = document.querySelectorAll("button");
 // All icons
 const allIcons = document.querySelectorAll("i");
+// Clear button
+const clearButton = document.querySelector(".clear");
 
 /***
 Global variables 
@@ -26,7 +28,6 @@ let currentArray = [];
 let currentValue = 0;
 // Variable for storing numbers during calculation
 let firstNum;
-let secondNum;
 // Current operator
 let currentOperator;
 
@@ -42,24 +43,7 @@ const updateCurrentValue = () => {
 
 // Clears display
 const clearArray = () => {
-  currentArray = Display.clearDisplay(currentArray);
-};
-
-const monitorDisplayLength = () => {
-  // Shifts sizing of calc display based on entry length
-  if (currentArray.length <= 6) {
-    display.style.fontSize = "4.1rem";
-  } else if (currentArray.length > 6 && currentArray.length < 10) {
-    display.style.fontSize = "3rem";
-  } else if (currentArray.length >= 10 && currentArray.length < 15) {
-    display.style.fontSize = "2.2rem";
-  } else {
-    display.style.fontSize = "1.5rem";
-  }
-  // Resets font size when the length reaches the 1e+ size
-  if (display.innerHTML.includes("e")) {
-    display.style.fontSize = "4.1rem";
-  }
+  currentArray = Display.clearDisplay(currentArray, clearButton);
 };
 
 /*** 
@@ -69,6 +53,7 @@ Event listeners
 // Reads key action
 const keyActions = (key) => {
   console.log("KEY-PRESSED:", key);
+
   switch (key) {
     case "0":
     case "1":
@@ -80,60 +65,72 @@ const keyActions = (key) => {
     case "7":
     case "8":
     case "9":
-      console.log("NEW NUMBER LOGGED");
-      key = parseInt(key); // Converts input to number
-      let newArray = Display.logInput(key, currentArray);
-      currentArray = newArray;
+      // Converts input to number
+      key = parseInt(key);
+      // Adds input numbers to an array
+      currentArray = Display.logInput(key, currentArray, clearButton);
+      // Pulls a single number from all of the array elements
       updateCurrentValue();
+      // Sets calc display to current value
       updateDisplay(display, currentValue);
-      console.log("NEW NUMBER: currentArray", currentArray);
-      console.log("NEW NUMBER: currentValue:", currentValue);
       break;
+
     case "/":
     case "*":
     case "-":
     case "+":
-      firstNum = Display.joinInput(currentArray);
-      console.log("OPERATOR: firstNum:", firstNum);
+      firstNum = currentValue;
+      console.log("Operator-Stage, firstNum:", firstNum);
       currentOperator = key;
       clearArray();
-      console.log("OPERATOR: currentArray", currentArray);
+      clearButton.innerHTML = "C";
+      console.log("Operator-Stage, currentArray:", currentArray);
       updateCurrentValue();
+      console.log("Operator-Stage, currentValue:", currentValue);
       updateDisplay(display, key);
-      console.log("OPERATOR: currentValue", currentValue);
       break;
+
     case "delete":
       clearArray();
       updateCurrentValue();
       updateDisplay(display, currentValue);
       break;
+
     case "negative":
       currentArray[0] === "-"
         ? currentArray.shift()
         : currentArray.unshift("-");
+      console.log("Negative-Stage, currentArray:", currentArray);
       updateCurrentValue();
+      console.log("Negative-Stage, currentArray:", currentValue);
       updateDisplay(display, currentValue);
-      console.log("NEGATIVE: currentArray", currentArray);
-      console.log("NEGATIVE: currentValue", currentValue);
       break;
+
     case "%":
       currentArray = [Calculate.convertPercent(currentValue)];
       updateCurrentValue();
       updateDisplay(display, currentValue);
       break;
+
     case "enter":
       currentArray = [
         Calculate.result(firstNum, currentOperator, currentValue),
       ];
-      console.log("RESULT - CURRENT ARRAY:", currentArray);
+      console.log("Equals-Stage, currentArray:", currentArray);
       updateCurrentValue();
-      console.log("RESULT - CURRENT VALUE:", currentValue);
+      console.log("Equals-Stage, currentValue:", currentValue);
       updateDisplay(display, currentValue);
+      break;
+
     case ".":
       currentArray = Calculate.addDecimal(currentArray);
+      console.log("Decimal-Stage, currentArray:", currentArray);
       updateCurrentValue();
+      console.log("Decimal-Stage, currentValue:", currentValue);
+      updateDisplay(display, currentValue);
   }
-  monitorDisplayLength();
+
+  Display.displayLengthMonitor(currentArray, display);
 };
 
 // Click listener for buttons
@@ -154,12 +151,16 @@ allIcons.forEach((icon) => {
 });
 
 // Key listener
+window.addEventListener("keyup", (e) => {
+  let key = e.key;
+  key = key.toLowerCase();
+  keyActions(key);
+});
+
+// Key listener
 window.addEventListener("keydown", (e) => {
   // Prevents Firefox's 'quick find' shortcut
   if (e.key === "/") {
     e.preventDefault();
   }
-  let key = e.key;
-  key = key.toLowerCase();
-  keyActions(key);
 });
