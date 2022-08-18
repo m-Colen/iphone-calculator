@@ -19,17 +19,21 @@ export const Display = {
     elem.innerHTML = "AC";
     return array;
   },
-  displayLengthMonitor(array, displayElem) {
-    let sizeReduction;
-    if (array.length < 9) {
-      sizeReduction = array.length * 0.1;
+  fontSizeMonitor(displayElem, value) {
+    // New font size
+    let newFontSize;
+    // Size reduction factor
+    let sizeReduction = 0;
+    if (value <= 100000) {
+      newFontSize = 4.1;
+    } else if (value > 100000 && value <= 10000000) {
+      newFontSize = 3.1;
+    } else if ((value > 10000000) & (value <= 100000000000)) {
+      newFontSize = 2.5;
     } else {
-      sizeReduction = array.length * 0.1355;
-    }
-    let newFontSize = 4.1 - sizeReduction;
-    if (newFontSize < 1.45) {
       newFontSize = 1.45;
     }
+
     displayElem.style.fontSize = `${newFontSize}rem`;
   },
 };

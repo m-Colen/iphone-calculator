@@ -130,7 +130,7 @@ const keyActions = (key) => {
       updateDisplay(display, currentValue);
   }
 
-  Display.displayLengthMonitor(currentArray, display);
+  Display.fontSizeMonitor(display, currentValue);
 };
 
 // Click listener for buttons

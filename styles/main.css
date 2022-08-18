@@ -53,18 +53,17 @@ button:hover {
   display: flex;
   justify-content: end;
   align-items: end;
-  padding: 0 1.7rem;
+  padding-bottom: 2rem;
+  width: 95%;
 }
 
-@media only screen and (max-height: 700px) {
-  .calc-display {
-    padding: 3rem 1.5rem;
+@media only screen and (max-height: 750px) {
+  button {
+    width: 75px;
+    height: 75px;
   }
-}
-
-@media only screen and (min-width: 700px) {
   .calc-display {
-    padding: 0rem 1rem;
+    padding-bottom: 3.3rem;
   }
 }
 
