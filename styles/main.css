@@ -68,7 +68,6 @@ button:hover {
 /* Calculator keys wrapper */
 
 .calc-keys {
-  height: 60%;
   grid-template-columns: 3fr 1fr;
   justify-items: center;
   align-content: center;
