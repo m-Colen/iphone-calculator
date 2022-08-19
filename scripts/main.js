@@ -52,7 +52,6 @@ Event listeners
 
 // Reads key action
 const keyActions = (key) => {
-  clearButton.innerHTML = "C";
   switch (key) {
     case "0":
     case "1":
@@ -72,6 +71,7 @@ const keyActions = (key) => {
       updateCurrentValue();
       // Sets calc display to current value
       updateDisplay(display, currentValue);
+      clearButton.innerHTML = "C";
       break;
 
     case "/":
