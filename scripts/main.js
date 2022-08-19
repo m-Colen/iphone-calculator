@@ -46,19 +46,13 @@ const clearArray = () => {
   currentArray = Display.clearDisplay(currentArray, clearButton);
 };
 
-// Changes clear button to 'C'
-const toggleClearButton = () => {
-  clearButton.innerHTML = "AC"
-    ? (clearButton.innerHTML = "C")
-    : (clearButton.innerHTML = "AC");
-};
-
 /*** 
 Event listeners
 ***/
 
 // Reads key action
 const keyActions = (key) => {
+  clearButton.innerHTML = "C";
   switch (key) {
     case "0":
     case "1":
@@ -78,7 +72,6 @@ const keyActions = (key) => {
       updateCurrentValue();
       // Sets calc display to current value
       updateDisplay(display, currentValue);
-      toggleClearButton();
       break;
 
     case "/":
@@ -95,8 +88,8 @@ const keyActions = (key) => {
     case "delete":
       clearArray();
       updateCurrentValue();
+      clearButton.innerHTML = "AC";
       updateDisplay(display, currentValue);
-      toggleClearButton();
       break;
 
     case "negative":
@@ -128,6 +121,7 @@ const keyActions = (key) => {
       updateCurrentValue();
       updateDisplay(display, currentValue);
   }
+  display.style.fontSize = `${Display.reduceFontSize(currentValue)}rem`;
 };
 
 // Click listener for buttons
