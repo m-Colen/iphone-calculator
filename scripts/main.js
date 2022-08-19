@@ -46,14 +46,19 @@ const clearArray = () => {
   currentArray = Display.clearDisplay(currentArray, clearButton);
 };
 
+// Changes clear button to 'C'
+const toggleClearButton = () => {
+  clearButton.innerHTML = "AC"
+    ? (clearButton.innerHTML = "C")
+    : (clearButton.innerHTML = "AC");
+};
+
 /*** 
 Event listeners
 ***/
 
 // Reads key action
 const keyActions = (key) => {
-  console.log("KEY-PRESSED:", key);
-
   switch (key) {
     case "0":
     case "1":
@@ -68,11 +73,12 @@ const keyActions = (key) => {
       // Converts input to number
       key = parseInt(key);
       // Adds input numbers to an array
-      currentArray = Display.logInput(key, currentArray, clearButton);
+      currentArray = Display.logInput(key, currentArray);
       // Pulls a single number from all of the array elements
       updateCurrentValue();
       // Sets calc display to current value
       updateDisplay(display, currentValue);
+      toggleClearButton();
       break;
 
     case "/":
@@ -80,13 +86,9 @@ const keyActions = (key) => {
     case "-":
     case "+":
       firstNum = currentValue;
-      console.log("Operator-Stage, firstNum:", firstNum);
       currentOperator = key;
       clearArray();
-      clearButton.innerHTML = "C";
-      console.log("Operator-Stage, currentArray:", currentArray);
       updateCurrentValue();
-      console.log("Operator-Stage, currentValue:", currentValue);
       updateDisplay(display, key);
       break;
 
@@ -94,15 +96,14 @@ const keyActions = (key) => {
       clearArray();
       updateCurrentValue();
       updateDisplay(display, currentValue);
+      toggleClearButton();
       break;
 
     case "negative":
       currentArray[0] === "-"
         ? currentArray.shift()
         : currentArray.unshift("-");
-      console.log("Negative-Stage, currentArray:", currentArray);
       updateCurrentValue();
-      console.log("Negative-Stage, currentArray:", currentValue);
       updateDisplay(display, currentValue);
       break;
 
@@ -110,27 +111,23 @@ const keyActions = (key) => {
       currentArray = [Calculate.convertPercent(currentValue)];
       updateCurrentValue();
       updateDisplay(display, currentValue);
+      display.innerHTML = currentValue.toFixed(2);
       break;
 
     case "enter":
       currentArray = [
         Calculate.result(firstNum, currentOperator, currentValue),
       ];
-      console.log("Equals-Stage, currentArray:", currentArray);
       updateCurrentValue();
-      console.log("Equals-Stage, currentValue:", currentValue);
       updateDisplay(display, currentValue);
+      display.innerHTML = currentValue.toFixed(2);
       break;
 
     case ".":
       currentArray = Calculate.addDecimal(currentArray);
-      console.log("Decimal-Stage, currentArray:", currentArray);
       updateCurrentValue();
-      console.log("Decimal-Stage, currentValue:", currentValue);
       updateDisplay(display, currentValue);
   }
-
-  Display.fontSizeMonitor(display, currentValue);
 };
 
 // Click listener for buttons

@@ -4,9 +4,8 @@ Display module
 
 export const Display = {
   // Adds input number(s) to a new array
-  logInput(inputNumber, array, elem) {
+  logInput(inputNumber, array) {
     array.push(inputNumber);
-    elem.innerHTML = "C";
     return array;
   },
   joinInput(array) {
@@ -14,16 +13,12 @@ export const Display = {
     joined = parseFloat(joined);
     return joined;
   },
-  clearDisplay(array, elem) {
+  clearDisplay(array) {
     array = [0];
-    elem.innerHTML = "AC";
     return array;
   },
-  fontSizeMonitor(displayElem, value) {
-    // New font size
+  reduceFontSize(value) {
     let newFontSize;
-    // Size reduction factor
-    let sizeReduction = 0;
     if (value <= 100000) {
       newFontSize = 4.1;
     } else if (value > 100000 && value <= 10000000) {
@@ -33,8 +28,7 @@ export const Display = {
     } else {
       newFontSize = 1.45;
     }
-
-    displayElem.style.fontSize = `${newFontSize}rem`;
+    return newFontSize;
   },
 };
 

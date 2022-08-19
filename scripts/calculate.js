@@ -3,7 +3,7 @@ Calculate module
 ***/
 
 export const Calculate = {
-  // Convert to percent
+  // Converts a value to percent and returns new value
   convertPercent(value) {
     let newValue = value / 100;
     return newValue;
@@ -11,13 +11,10 @@ export const Calculate = {
   // Adds decimal point
   addDecimal(array) {
     if (!array.includes(".")) {
-      if (array.length === 0) {
-        array.push(0);
-      }
       array.push(".");
       return array;
     } else {
-      throw new Error("decimal already entered");
+      return array;
     }
   },
   // Result
@@ -28,8 +25,6 @@ export const Calculate = {
       case "*":
         return num1 * num2;
       case "+":
-        console.log("num1:", num1);
-        console.log("num2:", num2);
         return num1 + num2;
       case "-":
         return num1 - num2;
