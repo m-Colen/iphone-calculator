@@ -44,8 +44,6 @@ button:hover {
   display: none;
 }
 
-/* Calculator Display */
-
 .calc-display {
   color: #fff;
   font-size: 4.1rem;
@@ -53,8 +51,8 @@ button:hover {
   display: flex;
   justify-content: end;
   align-items: end;
-  padding-bottom: 2rem;
-  width: 95%;
+  padding-bottom: 1.5rem;
+  width: 94.5%;
 }
 
 @media only screen and (max-height: 750px) {
@@ -63,7 +61,7 @@ button:hover {
     height: 75px;
   }
   .calc-display {
-    padding-bottom: 3.3rem;
+    padding-bottom: 1.5rem;
   }
 }
 
@@ -114,7 +112,7 @@ button:hover {
 /* Numeric keys */
 
 .numeric > button {
-  background: #505050; /* Dark Gray */
+  background: #242420; /* Dark Gray */
 }
 
 /* Zero button */
