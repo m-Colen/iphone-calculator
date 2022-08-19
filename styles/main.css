@@ -55,11 +55,7 @@ button:hover {
   width: 94.5%;
 }
 
-@media only screen and (max-height: 750px) {
-  button {
-    width: 75px;
-    height: 75px;
-  }
+@media only screen and (max-height: 900px) {
   .calc-display {
     padding-bottom: 3rem;
   }
