@@ -24,12 +24,12 @@ export const Display = {
     } else if (value > 100000 && value <= 10000000) {
       newFontSize = 3.1;
     } else if ((value > 10000000) & (value <= 100000000000)) {
-      newFontSize = 2.5;
+      newFontSize = 2.3;
     } else {
-      newFontSize = 1.45;
+      newFontSize = 1.2;
     }
     return newFontSize;
-  },
+  }
 };
 
 /* CJS Export for node.js testing */
